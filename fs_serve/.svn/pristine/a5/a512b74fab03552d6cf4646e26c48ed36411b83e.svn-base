@@ -1,0 +1,7 @@
+<config>
+<!-- 	<IP>wo88.nat123.net</IP> -->
+<!-- 	<IP>192.168.0.105</IP> -->
+	<IP>127.0.0.1</IP>
+<!-- 	<IP>fssf.eatuo.com</IP> -->
+	<PORT>9339</PORT>
+</config>

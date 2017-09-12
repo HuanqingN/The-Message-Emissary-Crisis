@@ -1,0 +1,5 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.023jsxq" x="0" y="48" layer="1"/>
+  <Button label="确认选择" skin="png.custom.btn_3a" x="200" y="358" layer="1" var="btn" name="btn" labelBold="true" labelColors="0x9b9b9b,0xffffff,0x9b9b9b" labelSize="14" letterSpacing="1" labelStroke="0x0" disabled="true" buttonMode="true" labelFont="黑体"/>
+  <Label text="00:29" styleSkin="png.comp.label" x="215" y="16" layer="1" align="center" font="Impact" size="30" color="0x4dfe00" bold="false" var="daojishi" name="daojishi" stroke="0*0" letterSpacing="3"/>
+</View>

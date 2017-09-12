@@ -1,0 +1,7 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.custom.b1" x="0" y="0" layer="1" sizeGrid="3,3,3,3" width="305" height="201"/>
+  <Label text="请选择你要宣言的颜色" styleSkin="png.comp.label" x="48" y="7" layer="1" color="0xffff00" size="20" var="title" name="title"/>
+  <Button label="蓝色" skin="png.comp.button" x="41" y="49" layer="1" width="230" height="38" labelColors="0x0000FF" labelSize="30" letterSpacing="10" labelFont="微软雅黑" var="bt1" name="bt1"/>
+  <Button label="红色" skin="png.comp.button" x="41" y="96" layer="1" width="230" height="38" labelColors="0xFF0000" labelSize="30" letterSpacing="10" var="bt2" name="bt2"/>
+  <Button label="黑色" skin="png.comp.button" x="41" y="143" layer="1" width="230" height="38" labelSize="30" letterSpacing="10" var="bt3" name="bt3"/>
+</Dialog>

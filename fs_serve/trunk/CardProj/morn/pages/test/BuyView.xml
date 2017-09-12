@@ -1,0 +1,16 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.摧毁底色" x="0" y="0" layer="1" width="388" height="349" sizeGrid="130,100,130,100"/>
+  <Image skin="png.custom.009gz1a" x="158" y="118" layer="1"/>
+  <Image skin="png.custom.009gz1b" x="159" y="190" layer="1" width="68" height="18" sizeGrid="5,5,5,5"/>
+  <Label styleSkin="png.comp.label" x="167" y="190" layer="1" width="62" height="18" color="0xffff00" align="center" var="price" name="price"/>
+  <Image skin="png.comp.coin" x="162" y="194" layer="1" width="10" height="10"/>
+  <Image x="164" y="124" layer="1" width="58" height="58" var="img" name="img"/>
+  <Image skin="png.custom.009gz1b" x="159" y="99" layer="1" width="68" height="18" sizeGrid="5,5,5,5"/>
+  <Label styleSkin="png.comp.label" x="161" y="99" layer="1" width="62" height="18" color="0xccff" align="center" var="txt" name="txt" text="选人卡" size="12" stroke="0x333333"/>
+  <HSlider skin="png.custom.hslider_cc" x="108" y="230" layer="1" min="1" max="100" showLabel="false" tick="1" var="hs1" name="hs1" width="179" height="8"/>
+  <Button label="确认购买" skin="png.custom.btn_3a" x="136" y="276" layer="1" labelColors="0xffff9b,0xffffff,0x9b9b9b" labelFont="黑体" labelSize="17." letterSpacing="5" labelBold="true" labelStroke="0x0" var="confirmbtn" name="confirmbtn"/>
+  <Label text="购买" styleSkin="png.comp.label" x="123" y="29" layer="1" width="146" height="39" color="0xffff33" size="30" align="center" letterSpacing="10" stroke="0xcccccc"/>
+  <Label text="花费总金额 ＝ 10000" styleSkin="png.comp.label" x="134" y="244" layer="1" width="160" height="18" color="0xccff33" var="counttxt" name="counttxt"/>
+  <Label text="X 1" styleSkin="png.comp.label" x="245" y="137" layer="1" color="0xccff33" size="25" width="99" height="31" bold="true" var="numtxt" name="numtxt"/>
+  <Button skin="png.custom.btn_009gb" x="357" y="14" layer="1" var="closebtn" name="closebtn"/>
+</Dialog>

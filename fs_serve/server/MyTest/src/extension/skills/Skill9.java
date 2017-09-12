@@ -1,0 +1,57 @@
+package extension.skills;
+
+import it.gotoandplay.smartfoxserver.SmartFoxServer;
+import it.gotoandplay.smartfoxserver.lib.ActionscriptObject;
+import extension.Player;
+import extension.cards.Card;
+import extension.cons.StepCons;
+import extension.vo.SkillVO;
+
+/**潜藏伏击**/
+public class Skill9 extends Skill {
+
+	@Override
+	public Boolean check() {
+		if(getOwner().getIsOpen()==false){
+//			if((noInforeceive() && selfturn()) || bf.nowStep==StepCons.InfoSend){
+			if(blueSkillCheck()){
+				if(hashInfoByOther())return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void play(SkillVO tvo) {
+		super.play(tvo);
+		getOwner().setIsOpen(true);
+		playAni(true);
+	}
+
+	@Override
+	public void excute() {
+		if(getOwner().getIsDead() || bf.roleMap.get(getTvo().target).getIsDead() || !hasInfoBySomeone(bf.roleMap.get(getTvo().target)) || getTvo().cards.size()==0){ //因为cards在这个技能的客户端里一定会产生，所以这里用size==0判断而不是！=null
+			return;
+		}
+		Card card=bf.cardsMap.get(getTvo().cards.get(0));		
+		Player target=bf.roleMap.get(getTvo().target);
+		if(!target.hasInfoCard(card)){
+			return;
+		}
+		target.removeCardFromInfo(card,false);
+		ActionscriptObject resp=new ActionscriptObject();
+		ActionscriptObject ca=new ActionscriptObject();
+		ActionscriptObject arr=new ActionscriptObject();
+		card.setResponse(ca);
+		arr.put(0,ca);
+		resp.putNumber("from",target.getUid());
+		resp.putNumber("type",6);  //type 1手卡到手卡 2 情报到手卡 3手卡到情报 4情报到情报5手卡到牌库顶6情报到牌库顶
+		resp.put("cards",arr);
+		resp.putNumber("h",2);
+		resp.putNumber("f",27);
+		bf.SendToALL(resp);
+		bf.cards.add(0, card);
+		bf.waitfor(2000);
+	}
+	
+}

@@ -1,0 +1,3 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Label text="等待玩家弃牌" styleSkin="png.comp.label" x="0" y="0" layer="1" color="0xffffff" align="center" size="30" stroke="0x6699" width="598" height="54" var="txt" name="txt"/>
+</Dialog>

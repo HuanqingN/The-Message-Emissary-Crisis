@@ -1,0 +1,13 @@
+<View width="112" height="201" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.comp.老兵" x="0" y="1" layer="1" width="105" height="129" var="bg" name="bg"/>
+  <Image skin="png.custom.018zbk" x="0" y="0" layer="1" width="112" height="201"/>
+  <Label text="礼服蒙面人" styleSkin="png.comp.label" x="3" y="4" layer="1" width="24" height="98" wordWrap="true" multiline="true" color="0xff33" stroke="0" align="center" var="rname" name="rname" size="15"/>
+  <Label text="一二三四五六七八" styleSkin="png.comp.label" x="0" y="126" layer="1" width="107" height="18" color="0xffffff" stroke="0xcccc" align="center" var="nick" name="nick"/>
+  <Label text="军情" styleSkin="png.comp.label" x="62" y="1" layer="1" color="0xffff00" size="20." rotation="0" width="46" height="27" stroke="0x0" var="iden" name="iden"/>
+  <Image skin="png.comp.coin" x="6" y="164" layer="1"/>
+  <Label styleSkin="png.comp.label" x="32" y="164" layer="1" width="63" height="18" color="0xffffff" stroke="0xff00" var="coin" name="coin"/>
+  <Box layers="1,1,0,0,第 1 层" layer="1" x="8" y="77" var="lvbox" visible="false">
+    <Label text="等级提升" styleSkin="png.comp.label" layer="1" color="0xffff00" size="20" rotation="0" width="96" height="28" stroke="0x0" align="center"/>
+    <Label styleSkin="png.comp.label" x="9" y="24" layer="1" color="0xffff00" size="15" rotation="0" width="77" height="20" stroke="0x0" var="lvtxt" name="lvtxt" align="center"/>
+  </Box>
+</View>

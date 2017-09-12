@@ -1,0 +1,6 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.006wr" x="12" y="15" layer="1" width="118" height="155" var="img" name="img"/>
+  <Image skin="png.rpg.heroframe" x="0" y="0" layer="1" var="kuang" name="kuang"/>
+  <Label text="礼服蒙面人" styleSkin="png.comp.label" x="21" y="161" layer="1" width="98" height="25" color="0x33ffff" size="15" align="center" stroke="0x333333" var="ntxt" name="ntxt"/>
+  <Label text="公开" styleSkin="png.comp.label" x="83" y="26" layer="1" width="40" height="21" color="0xff0000" align="center" size="13" bold="true" stroke="0xcccccc" var="hidetxt" name="hidetxt"/>
+</View>

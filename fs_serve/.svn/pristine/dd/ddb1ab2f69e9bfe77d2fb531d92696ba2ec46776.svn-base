@@ -1,0 +1,11 @@
+<View width="1000" height="700" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <UIView source="test/HallItem.xml" x="580" y="331" layer="1" scaleX="0.5" scaleY="0.5" var="bt4" name="bt4"/>
+  <UIView source="test/HallItem.xml" x="323" y="331" layer="1" scaleX="0.5" scaleY="0.5" var="bt5" name="bt5"/>
+  <UIView source="test/HallItem.xml" x="141" y="143" layer="1" var="bt1" name="bt1" scaleX="0.8" scaleY="0.8"/>
+  <UIView source="test/HallItem.xml" x="378" y="66" layer="1" var="bt2" name="bt2"/>
+  <UIView source="test/HallItem.xml" x="671" y="144" layer="1" var="bt3" name="bt3" scaleX="0.8" scaleY="0.8"/>
+  <Button label="进入" skin="png.custom.btn_room" x="402" y="595" layer="1" width="215" height="75" labelSize="40" labelColors="0xffffff,0xffffff,0xffffff" labelStroke="0x0" var="enter" name="enter" letterSpacing="5"/>
+  <Button label="&lt;&lt;" skin="png.custom.btn_room" x="24" y="252" layer="1" width="73" height="90" labelSize="40" labelColors="0xffffff,0xffffff,0xffffff" var="leftbtn" name="leftbtn"/>
+  <Button label=">>" skin="png.custom.btn_room" x="906" y="252" layer="1" width="73" height="90" labelSize="40" labelColors="0xffffff,0xffffff,0xffffff" var="rightbtn" name="rightbtn"/>
+  <Label text="模式选择" styleSkin="png.comp.label" x="420.5" y="7" layer="1" width="159" height="44" size="40" align="center" stroke="0x333333"/>
+</View>

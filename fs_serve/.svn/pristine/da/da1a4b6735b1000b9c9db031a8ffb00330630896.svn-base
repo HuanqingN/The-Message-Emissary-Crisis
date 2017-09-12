@@ -1,0 +1,19 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.摧毁底色" x="0" y="0" layer="1" width="621" height="523" sizeGrid="130,100,130,100"/>
+  <Label text="商城" styleSkin="png.comp.label" x="249" y="22" layer="1" width="146" height="39" color="0xffff33" size="30" align="center" letterSpacing="10" stroke="0xcccccc"/>
+  <Button skin="png.custom.btn_009gb" x="590" y="14" layer="1" var="closebtn" name="closebtn"/>
+  <Button label="道具" skin="png.custom.btn_left" x="30" y="60" layer="1" selected="true" labelColors="0x6fd0d9,0x000808" labelSize="15" letterSpacing="5" var="bt1" name="bt1" stateNum="2" width="80" height="25"/>
+  <Button label="卡片" skin="png.custom.btn_middle" x="91" y="60" layer="1" selected="false" labelColors="0x6fd0d9,0x000808" labelSize="15" letterSpacing="5" var="bt2" name="bt2" stateNum="2" height="25"/>
+  <Button label="金币" skin="png.custom.btn_middle" x="160" y="60" layer="1" selected="false" labelColors="0x6fd0d9,0x000808" labelSize="15" letterSpacing="5" var="bt3" name="bt3" stateNum="2" height="25"/>
+  <Button label="黑晶" skin="png.custom.btn_right" x="228" y="60" layer="1" selected="false" labelColors="0x6fd0d9,0x000808" labelSize="15" letterSpacing="5" var="bt4" name="bt4" stateNum="2" height="25"/>
+  <UIView source="test/ShopItem.xml" x="77" y="121" layer="1" var="sitem0" name="sitem0"/>
+  <UIView source="test/ShopItem.xml" x="207" y="121" layer="1" var="sitem1" name="sitem1"/>
+  <UIView source="test/ShopItem.xml" x="337" y="121" layer="1" var="sitem2" name="sitem2"/>
+  <UIView source="test/ShopItem.xml" x="467" y="121" layer="1" var="sitem3" name="sitem3"/>
+  <UIView source="test/ShopItem.xml" x="77" y="278" layer="1" var="sitem4" name="sitem4"/>
+  <UIView source="test/ShopItem.xml" x="207" y="278" layer="1" var="sitem5" name="sitem5"/>
+  <UIView source="test/ShopItem.xml" x="337" y="278" layer="1" var="sitem6" name="sitem6"/>
+  <UIView source="test/ShopItem.xml" x="467" y="278" layer="1" var="sitem7" name="sitem7"/>
+  <Image skin="png.comp.coin" x="484" y="69" layer="1" width="10" height="10"/>
+  <Label styleSkin="png.comp.label" x="498" y="65" layer="1" width="74" height="18" color="0xcccc33" var="cointxt" name="cointxt"/>
+</Dialog>

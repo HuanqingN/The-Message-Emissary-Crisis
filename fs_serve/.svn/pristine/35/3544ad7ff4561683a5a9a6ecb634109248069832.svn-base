@@ -1,0 +1,19 @@
+/**Created by the Morn,do not modify.*/
+package game.ui.test {
+	import morn.core.components.*;
+	public class NoticUI extends Dialog {
+		public var text1:TextArea = null;
+		public var closebtn:Button = null;
+		protected static var uiXML:XML =
+			<Dialog>
+			  <Image skin="png.custom.公告底色" x="0" y="0" width="500" height="570" smoothing="true" sizeGrid="213,100,215,120"/>
+			  <TextArea text="版本更新公告（Version=0.145）\n***更新内容：\n一、角色调整\n1.武僧\n-【严酷训诫】的触发手牌数由7张下调为5张。\n-【疾风骤雨】从随机弃目标的一张牌调整为检视目标的手牌，然后从中选择一张弃置。\n-修行面的酱油任务的【疾风骤雨】的发动次数要求从3次下调为2次。\n2.税务局长\n-【纳税】选择“交出”时，不再需要交出一张非纳税手牌，现在只需要交出抽到的那张【纳税】。\n-【收税】的抽牌数从2张调高至3张。\n-添加了角色配音。\n3.卯先生\n-该角色禁选解除。\n-从隐藏角色调整为公开角色。\n-【反噬】、【救赎】已删除。\n-【侵蚀】新增：如果用黑换到黑，则卯先生抽一张牌。\n-酱油任务调整为“获得三张或以上的蓝情报”。\n4.密探提符\n-【胸有成竹】的技能类型从触发技（红色）调整为响应技（蓝色）。\n5.老兵\n-酱油任务调整为“集齐十张手牌”。\n6.情报处长、译电员\n-【凿壁偷光】、【加密】已删除。\n二、bug修复\n1.创建房间\n-基于现况，为了方便创建房间，现在暂时默认不勾选允许同IP选项。2.抽牌相关\n-修复了【激素】、【公开文档】、【纳税】刚抽上的牌无法使用的bug。\n3.【烧毁】\n-修复了出云龙使用的【烧毁】结算时若目标面前没有黑情报会卡死的bug。\n4.漩涡\n-修复了在漩涡死亡的回合其还能发动【迷局】的bug。\n5.柒佰\n-修复了【风度】能对实际已经死亡但客户端还没显示死亡的角色（如老鬼【遗志】柒佰致胜）发动的bug。\n6.华生\n-修复了【化验】整场游戏只能发动一次的bug。\n" x="34" y="74" width="437" height="452" size="18" color="0xffffff" selectable="true" editable="false" vScrollBarSkin="png.comp.vscroll1" margin="3,0,10,3" var="text1" name="text1" leading="10" underline="false"/>
+			  <Button skin="png.custom.btn_009gb" x="467" y="16" var="closebtn" name="closebtn"/>
+			</Dialog>;
+		public function NoticUI(){}
+		override protected function createChildren():void {
+			super.createChildren();
+			createView(uiXML);
+		}
+	}
+}

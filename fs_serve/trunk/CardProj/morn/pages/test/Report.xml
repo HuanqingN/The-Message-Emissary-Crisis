@@ -1,0 +1,4 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.011xxk" x="0" y="0" layer="1" width="681" height="496"/>
+  <TextArea x="37" y="38" layer="1" width="629" height="452" vScrollBarSkin="png.comp.vscroll1" size="17" isHtml="true" margin="30,10,30,10" color="0xffffff" var="ta" name="ta"/>
+</View>

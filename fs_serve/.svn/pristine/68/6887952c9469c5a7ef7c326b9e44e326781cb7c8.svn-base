@@ -1,0 +1,5 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="2,1,0,0,第 2 层;1,1,0,0,第 1 层">
+  <Image skin="png.custom.024jsblank" x="0" y="0" layer="1" var="card1" name="card1"/>
+  <Image skin="png.custom.024jskk" x="0" y="0" layer="2" mouseChildren="false" disabled="false" mouseEnabled="false"/>
+  <Label styleSkin="png.comp.label" x="4" y="10" layer="2" width="26" height="140" align="center" multiline="true" wordWrap="true" size="18" color="0x4efe00" stroke="0" selectable="false" mouseEnabled="false" var="pname1" name="pname1" text="皇家密探" bold="true" font="方正粗倩简体"/>
+</View>

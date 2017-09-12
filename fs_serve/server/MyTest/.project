@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>MyTest</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>extension</name>
+			<type>2</type>
+			<locationURI>extension</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>extension</name>
+			<value>file:/C:/SmartFoxServerPRO_1.6.6/Server/javaExtensions/extension</value>
+		</variable>
+	</variableList>
+</projectDescription>

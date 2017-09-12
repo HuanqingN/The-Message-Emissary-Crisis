@@ -1,0 +1,12 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.009gz1a" x="0" y="19" layer="1" url="assets/icons/frame1.png"/>
+  <Image skin="png.custom.009gz1b" x="1" y="91" layer="1" width="68" height="18" sizeGrid="5,5,5,5" url="assets/icons/tine.png"/>
+  <Button label="购买" skin="png.custom.btn_012hs" x="1" y="112" layer="1" width="68" labelColors="0xffffff,0xffffff,0xffffff" labelSize="15" var="btn" name="btn"/>
+  <Label styleSkin="png.comp.label" x="9" y="91" layer="1" width="62" height="18" color="0xffff00" align="center" var="price" name="price"/>
+  <Image skin="png.comp.coin" x="4" y="95" layer="1" width="10" height="10"/>
+  <Image x="6" y="25" layer="1" width="58" height="58" var="img" name="img"/>
+  <Image skin="png.custom.009gz1b" x="1" y="0" layer="1" width="68" height="18" sizeGrid="5,5,5,5" url="assets/icons/tine.png"/>
+  <Label styleSkin="png.comp.label" x="5" y="0" layer="1" width="62" height="18" color="0xccff" align="center" var="txt" name="txt" text="选人卡" size="12" stroke="0x333333"/>
+  <Image skin="png.custom.009gz1b" x="5" y="67" layer="1" width="29" height="18" sizeGrid="5,5,5,5" url="assets/icons/tine.png"/>
+  <Label text="0" styleSkin="png.comp.label" x="8" y="68" layer="1" color="0xffffff" width="25" height="15" size="9" align="center" var="ntxt" name="ntxt"/>
+</View>

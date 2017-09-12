@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+	n:名字    t:类型  1道具2其它  cv:额度  ct:金钱类型 1金币2黑日3其它 desc:描述
+	
+  -->
+<props>
+	<prop id="1" tag="1" n="选人卡" t="1" cv="2000" ct="1" desc="选人卡" />
+	<prop id="2" tag="1" n="换人卡" t="1" cv="1000" ct="1" desc="换人卡" />
+	<prop id="3" tag="1" n="换牌卡" t="1" cv="1000" ct="1" desc="换牌卡" />
+	<prop id="4" tag="1" n="身份卡" t="1" cv="1000" ct="1" desc="身份卡" />
+	<prop id="5" tag="1" n="小喇叭" t="1" cv="500" ct="1" desc="小喇叭" />
+</props>

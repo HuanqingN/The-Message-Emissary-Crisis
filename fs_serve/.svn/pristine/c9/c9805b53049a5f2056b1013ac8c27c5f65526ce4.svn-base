@@ -1,0 +1,51 @@
+package extension.skills;
+import it.gotoandplay.smartfoxserver.lib.ActionscriptObject;
+
+import java.util.ArrayList;
+
+import extension.Player;
+import extension.cards.Card;
+import extension.cons.StepCons;
+import extension.vo.SelectVO;
+import extension.vo.SkillVO;
+/**
+ *涌动：[触发技]你的出牌阶段，若场上存在面前有两张或以上黑情报的其他玩家，你可以翻开此角色牌，弃置X张手牌，然后抽X+2张牌
+ */
+public class Skill156 extends Skill {
+
+	@Override
+	public Boolean check() {
+		if(!getOwner().getIsDead() && !getOwner().getIsOpen() && bf.nowPlayer==getOwner() && getOwner().handcards.size()>0 && (bf.nowStep==StepCons.CardUse1 || bf.nowStep==StepCons.CardUse2) && bf.usedCardStack.size()==0 ){
+			for(Player p:bf.roleSeq){
+				if(p!=getOwner() && p.blackCards.size()>=2){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void play(SkillVO tvo) {
+		super.play(tvo);
+		getOwner().setIsOpen(true);
+		playAni(true);
+		bf.sResult.dispose();
+		bf.waitfor(12000);
+		userSelected(bf.sResult);
+		
+	}
+	
+	private void userSelected(SelectVO svo){
+		if(svo.cards==null)return;
+		ArrayList<Card> temp=new ArrayList<Card>();
+		for(Integer i:svo.cards){
+			temp.add(bf.cardsMap.get(i));
+		}
+		bf.disCard(getOwner(), temp, 1, null);
+		bf.waitfor(2000);
+		bf.drawCard(getOwner(),bf.getCardFromCardPack(temp.size()+2) , 1, null); 
+		bf.waitfor(1500);
+	}
+	
+}

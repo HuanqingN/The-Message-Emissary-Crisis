@@ -1,0 +1,20 @@
+<View width="1000" height="700" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.rpg.background1" x="0" y="0" layer="1"/>
+  <Image skin="png.rpg.addicon" x="17" y="24" layer="1" var="devbtn" name="devbtn"/>
+  <Image skin="png.rpg.closebtn" x="940" y="14" layer="1" var="closebtn" name="closebtn"/>
+  <Box layers="1,1,0,0,第 1 层" layer="1" x="64" y="47" var="dev" name="dev" width="877" height="576">
+    <Image skin="png.rpg.background2" layer="1" x="0" y="0" width="877" height="603"/>
+    <Image skin="png.rpg.frame0" x="78" y="128" layer="1"/>
+    <Image skin="png.rpg.frame0" x="78" y="333" layer="1"/>
+    <Image skin="png.rpg.frame2" x="205" y="128" layer="1"/>
+    <Image skin="png.rpg.frame2" x="205" y="332" layer="1"/>
+    <Image skin="png.rpg.frame1" x="329" y="128" layer="1"/>
+    <Image skin="png.rpg.frame1" x="453" y="128" layer="1"/>
+    <Image skin="png.rpg.frame1" x="577" y="128" layer="1"/>
+    <Image skin="png.rpg.frame1" x="701" y="128" layer="1"/>
+    <Image skin="png.rpg.frame1" x="329" y="332" layer="1"/>
+    <Image skin="png.rpg.frame1" x="453" y="332" layer="1"/>
+    <Image skin="png.rpg.frame1" x="577" y="332" layer="1"/>
+    <Image skin="png.rpg.frame1" x="701" y="332" layer="1"/>
+  </Box>
+</View>

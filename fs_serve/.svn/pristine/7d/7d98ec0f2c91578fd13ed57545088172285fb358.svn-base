@@ -1,0 +1,578 @@
+package views
+{
+	import com.adobe.utils.StringUtil;
+	import com.greensock.TweenMax;
+	
+	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
+	import flash.geom.Matrix;
+	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
+	
+	import core.mng.Assign;
+	import core.mng.Evt;
+	import core.mng.Player;
+	import core.mng.SFS;
+	
+	import datas.Cons;
+	import datas.GL;
+	import datas.Trans;
+	
+	import game.ui.test.BattleViewUI;
+	
+	import handlers.BattleHandler;
+	
+	import manage.BM;
+	
+	import morn.core.components.Button;
+	
+	import skills.*;
+	
+	import utils.ArrayUtil;
+	import utils.HashMap;
+	import utils.OBJUtil;
+	import utils.Rand;
+	
+	public class BattleView extends BattleViewUI
+	{
+		private var mclass:Array=[Role0,Role1,Role2,Role3,Role4,Role5,Role6,Role7,Role8,Role9,	Role10,	Role11,	Role12,	Role13,	Role14,	Role15,	Role16,Role17,
+			Role40,Role18,Role19,Role20,Role21,Role22,Role23,Role24,Role25,Role26,Role27,Role28,Role29,Role30,Role31,Act0,Role32,Role33,Role34,Role35,Role36,Role37,Role38,
+			Role41,Role42,Role43,Role39,Role44,Role45,Role46,Role47,Role48,Role49,Role50,Role51,
+			Act1_1,	Act1_2,	Act1_3,	Act1_4,	Act1_5,	Act2_1,	Act2_2,	Act2_3,	Act2_4,	Act2_5,	Act3_1,	Act3_2,	Act3_3,	Act4_1,	Act4_2,	Act4_3,	Act4_4,
+			Act4_5,	Act5_1,	Act5_2,	Act5_3,	Act5_4,	Act5_5,	Act6_1,	Act6_2,	Act6_3,	Act6_4,	Act6_5,	Act7_3,	Act8_1,	Act8_2,	Act9_1,	Act9_2,	Act9_3,	Act10_1,
+			Act10_2,	Act10_3,	Act10_4,	Act10_5,	Act11_3,	Act12_1,	Act12_2,	Act12_3,	Act13_1,	Act13_2,	Act13_3,	Act14_1,	Act14_2,	Act14_3,	Act15_1,	Act15_2,	Act15_3,	Act16_1,	Act16_2,
+			Act16_3,	Act17_1,	Act17_2,	Act17_3,	Act18_1,	Act18_2,	Act18_3,	Act19_1,	Act20_2,	Act21_3,Act0_0,Act99_0,Act0_1,
+		Skill1,Skill2,Skill3,Skill4,Skill5,Skill6,Skill7,Skill8,Skill9,Skill10,Skill11,Skill12,Skill13,Skill14,Skill15,Skill16,Skill17,Skill18,Skill19,Skill20,Skill21,Skill22,Skill23,Skill24,
+		Skill25,Skill26,Skill27,Skill28,Skill29,Skill30,Skill31,Skill32,Skill33,Skill34,Skill35,Skill36,Skill37,Skill38,Skill39,Skill40,Skill41,Skill42,Skill43,Skill44,Skill45,Skill46,Skill47,Skill48,Skill49,Skill50,Skill51,Skill52,Skill53,Skill54,Skill55,
+		Skill56,Skill57,Skill58,Skill59,Skill60,Skill61,Skill62,Skill63,Skill64,Skill65,Skill66,Skill67,Skill68,Skill69,Skill70,Skill71,Skill72,Skill73,Skill74,Skill98,Skill99,Skill100,Skill101,Skill102,Skill103,Skill104,Skill105,Skill106,Skill107,
+		Skill108,Skill109,Skill110,Skill75,Skill76,Skill77,Skill78,Skill79,Skill80,Skill81,Skill82,Skill83,Skill84,Skill85,Skill86,Skill87,Skill88,Skill89,Skill90,Skill91,Skill92,Skill93,Skill94,Skill95,Skill96,Skill97,
+		Skill111,Skill112,Skill113,Skill117,Skill118,Skill125,Skill126,Skill127,Skill128,Skill114,Skill115,Skill116,Skill122,Skill123,Skill124,Skill129,Skill130,Skill131,Skill132,Skill133,
+		Skill134,Skill135,Skill136,Skill137,Skill138,Skill139,Skill140,Skill141,Skill142,Skill143,Skill144,Skill145,Skill146,Skill147,Skill148,Skill149,Skill150,,Skill151,Skill152,Skill153,Skill154,Skill155,Skill118,Skill119,Skill120,Skill156,Skill157,Skill158
+		];
+		public var decodedialog:DecodeDialog;
+		public var cardDidialog:CardDialog;
+		private var _passView:PassDialog;
+		private var eff8:Eff8;
+		private var eff9:Eff9;
+		private var eff7:Eff7;
+		private var report:Report;
+		public var roleAreas:Array;
+		public var probeView:ProbeView;  //试探界面
+		public var infoview:InfoView;//信息界面
+		private var btns:Array=["bt1","bt2","bt4","bt5","d1"];
+		private var predata:Object;
+		private var skillBtn:HashMap=new HashMap();
+		private var selectdialog:SelectTarget;		
+		private var balls:HashMap=new HashMap()
+		public function BattleView()
+		{
+			Assign.inst.register(Cons.handler.BattleHandler,new BattleHandler);
+			for(var i:int in btns){
+				this[btns[i]].addEventListener(MouseEvent.CLICK,onBtnClick);
+			}
+			msginput.addEventListener(FocusEvent.FOCUS_IN,onMSGFoucusIn);
+			msginput.addEventListener(FocusEvent.FOCUS_OUT,onMSGFoucusOut);
+//			chatbtn.addEventListener(MouseEvent.CLICK,chatClick);
+			msginput.addEventListener(KeyboardEvent.KEY_DOWN,msgKeydown);
+			facebtn.addEventListener(MouseEvent.CLICK,facebtnClick);
+			for (var j:int = 1; j <13; j++) 
+			{
+				this["b"+j].addEventListener(MouseEvent.CLICK,faceClick);
+				this["b"+j].data=j;
+			}
+			
+		}
+		
+		protected function onMSGFoucusOut(event:FocusEvent):void
+		{
+			msgarea.visible=false;
+			face.visible=false;
+		}
+		
+		protected function onMSGFoucusIn(event:FocusEvent):void
+		{
+			msgarea.visible=true;
+			if(msgarea.visible){
+				this.setChildIndex(msgarea,this.numChildren-1);
+			}
+		}
+		public function facebtnClick(evt:MouseEvent):void{
+			face.visible=!face.visible;
+			if(face.visible){
+				this.setChildIndex(face,this.numChildren-1);
+			}
+		}
+		public function faceClick(evt:MouseEvent):void{
+			face.visible=false;
+			if(chatinterval==0 || getTimer()-chatinterval>6000){
+				SFS.inst.sfs.sendXtMessage(Cons.extension.roomserv,Cons.cmd.OnQuickChat,{tid:GL.tableId,ctype:1,value:evt.currentTarget.data},"xml");
+				chatinterval=getTimer();
+			}
+			
+		}
+		protected function msgKeydown(event:KeyboardEvent):void
+		{
+			if(event.keyCode==Keyboard.ENTER){
+				if(StringUtil.trim(msginput.text)=="")return;
+				if(chatinterval==0 || getTimer()-chatinterval>6000){
+					SFS.inst.sfs.sendXtMessage(Cons.extension.login,Cons.cmd.ChatMsg,{tid:GL.tableId,ctype:1,msg:msginput.text,uid:GL.id},"xml");
+					chatinterval=getTimer();
+				}
+				msginput.text="";
+//				msgarea.visible=false;
+//				msginput.visible=false;
+			}
+		}
+		private var chatinterval:Number=0;
+		protected function chatClick(event:MouseEvent):void
+		{
+//			if(chatinterval==0){
+//			msgbox.visible=!msgbox.visible;
+//			if(msgbox.visible){
+//				this.setChildIndex(msgbox,this.numChildren-1);
+//			}
+//				msginput.visible=!msginput.visible;
+//				msgarea.visible=msginput.visible;
+//			}else{
+//					chatinterval=0;
+//					msginput.visible=!msginput.visible;
+//					msgarea.visible=msginput.visible;
+//			}
+		}
+		override public function dispose():void
+		{
+			super.dispose();
+			for (var j:int = 1; j <13; j++) 
+			{
+				this["b"+j].removeEventListener(MouseEvent.CLICK,faceClick);
+			}
+			msginput.removeEventListener(FocusEvent.FOCUS_IN,onMSGFoucusIn);
+			msginput.removeEventListener(FocusEvent.FOCUS_OUT,onMSGFoucusOut);
+//			chatbtn.removeEventListener(MouseEvent.CLICK,chatClick);
+			msginput.removeEventListener(KeyboardEvent.KEY_DOWN,msgKeydown);
+			clearSkillBtnState();
+			balls=null;
+			clearTime();
+			Assign.inst.remove(Cons.handler.BattleHandler);
+			if(decodedialog){
+				decodedialog.dispose();
+				decodedialog=null;
+			}
+			if(cardDidialog){
+				cardDidialog.dispose();
+				cardDidialog=null;
+			}
+			if(_passView){
+				_passView.dispose();
+				_passView=null;
+			}
+			if(probeView){
+				probeView.dispose();
+				probeView=null;
+			}
+			if(infoview){
+				infoview.dispose();
+				infoview=null;
+			}
+			if(selectdialog){
+				selectdialog.dispose();
+				selectdialog=null;
+			}
+			if(report){
+				report.dispose();
+				report=null;
+			}
+			skillBtn.clear();
+			skillBtn=null;
+			predata=null;
+			btns=null;
+			mclass=null;
+			roleAreas=null;
+			eff7=null;
+			eff8=null;
+			eff9=null;
+		}
+		override protected function initialize():void
+		{
+			super.initialize();
+			if(predata)
+				BM.inst.register(this,predata);
+		}
+		
+		public function start(d:Object):void{
+			if(initialized)
+				BM.inst.register(this,d);
+			else{
+				predata=d;
+			}
+		}
+		public function initSeat(temp:Array):HashMap{
+			var result:HashMap=new HashMap();
+			var index:int=ArrayUtil.getIndexByParam(temp,"uid",GL.id);
+			var temp1:Array=temp.splice(index,temp.length);
+			temp=temp1.concat(temp);
+			var count:int=GL.battleMaxU;
+			var arr:Array=GL.layout.get(count) as Array;
+			var arr1:Array=GL.infoPos.get(count) as Array;
+			roleAreas=[];
+			for (var i:int = 0; i < arr.length; i++) 
+			{
+				var p:Player=new Player();
+				var ra:RoleArea=new RoleArea();
+				p.view=ra;
+				p.uid=temp[i].uid;
+				ra.uid=p.uid;
+				p.rname=temp[i].rname;
+				ra.x=arr[i].x;
+				ra.y=arr[i].y;
+				ra.infoPos=arr1[i];
+				ra.back.bitmapData=new Role0();
+				roleAreas.push(ra); 
+				result.put(temp[i].uid,p);
+				addChild(ra);
+			}
+//			this.setChildIndex(bottomarea,0);
+			predata=null;
+			return result;
+		}
+		private var checkFoldTime:Number=0;
+		protected function onBtnClick(event:MouseEvent):void
+		{
+			switch(event.currentTarget.name)
+			{
+				case "bt1":  //托管
+					tuoguan.visible=!tuoguan.visible;
+					if(tuoguan.visible){
+						BM.inst.clearState(true);
+						SFS.send(Cons.extension.roomserv,Cons.cmd.OnPass,{uid:GL.id,tid:GL.tableId,ctype:1,oid:BM.inst.oid});
+					}
+						SFS.send(Cons.extension.roomserv,Cons.cmd.onTrusttee,{tid:GL.tableId,ctype:1,boo:tuoguan.visible,oid:BM.inst.oid});
+					break;
+				case "bt2":
+					BM.inst.clearState(true);
+					SFS.send(Cons.extension.roomserv,Cons.cmd.OnPass,{uid:GL.id,tid:GL.tableId,ctype:1,oid:BM.inst.oid});
+					bt2.selected=bt2.mouseEnabled=false;
+					break;
+				case "bt3":
+					break;
+				case "bt4":
+					if(!report){
+						report=new Report();
+						report.x=(width-report.width)/2;
+					}
+						report.y=-36;
+					if(report.isshow){
+						TweenMax.to(report,0.5,{y:-600,onComplete:function(){App.dialog.removeChild(report)}});
+						report.isshow=false;
+					}else{
+						App.dialog.addChild(report);
+						TweenMax.from(report,0.5,{y:-600});
+						report.isshow=true;
+					}
+					break;
+				case "bt5":
+					break;
+				case "d1":
+					if((getTimer()-checkFoldTime)>=5000){
+						SFS.send(Cons.extension.roomserv,Cons.cmd.GetFoldCards,{uid:GL.id,tid:GL.tableId,ctype:1});
+						checkFoldTime=getTimer();
+					}
+					break;
+				case "s1":
+					BM.inst.clearState();
+					s1.removeEventListener(MouseEvent.CLICK,onBtnClick);
+					s1.data.launch();
+					break;
+				case "s2":
+					BM.inst.clearState();
+					s2.removeEventListener(MouseEvent.CLICK,onBtnClick);
+					s2.data.launch();
+					break;
+				case "s3":
+					BM.inst.clearState();
+					s3.removeEventListener(MouseEvent.CLICK,onBtnClick);
+					s3.data.launch();
+					break;
+				case "s4":
+					BM.inst.clearState();
+					s4.removeEventListener(MouseEvent.CLICK,onBtnClick);
+					s4.data.launch();
+					break;
+			}			
+		}		
+		public function setReport(str:String):void{
+			if(!report){
+				report=new Report();
+				report.x=(width-report.width)/2;
+			}
+			report.ta.appendText(str);
+			report.ta.scrollTo(report.ta.maxScrollV);
+		}
+		public function moivePlayEnd():void{
+			if(eff7 && this.contains(eff7))this.removeChild(eff7);
+			if(eff8 && this.contains(eff8))this.removeChild(eff8);
+			if(eff9 && this.contains(eff9))this.removeChild(eff9);
+//				this.removeChild(eff9);
+//				eff9.stop();
+//			}
+		}
+		public function playplayYellowAnimation(c:int,n:String,rid:int):void{
+			if(!eff9)eff9=new Eff9();
+			eff9.gotoAndPlay(1);
+			eff9.sname.sname.text=n;
+			eff9.x=this.width/2;
+			eff9.y=this.height/2;
+			eff9.back.txt.text=GL.roleData.get(rid).n;
+			eff9.back.graphics.clear();
+			var mt:Matrix=new Matrix();
+			mt.tx=-75;
+			mt.ty=-105.5;
+			eff9.back.graphics.beginBitmapFill(OBJUtil.getInstanceByClassName("Role"+rid) as BitmapData,mt);
+			eff9.back.graphics.drawRect(-75,-105.5,139,196);
+			eff9.back.graphics.endFill();
+			this.addChild(eff9);
+		}
+		public function playSkillNormalAnimation(c:int,n:String,rid:int):void{
+			if(!eff7)eff7=new Eff7();
+			eff7.gotoAndPlay(1);
+			eff7.sname.sname.text=n;
+			eff7.x=this.width/2;
+			eff7.y=this.height/2;
+			eff7.back.txt.text=GL.roleData.get(rid).n;
+			eff7.back.graphics.clear();
+			var mt:Matrix=new Matrix();
+			mt.tx=-75;
+			mt.ty=-105.5;
+			eff7.back.graphics.beginBitmapFill(OBJUtil.getInstanceByClassName("Role"+rid) as BitmapData,mt);
+			eff7.back.graphics.drawRect(-75,-105.5,139,196);
+			eff7.back.graphics.endFill();
+			this.addChild(eff7);
+		}
+		public function playSkillTurnAnimation(c:int,n:String,frid:int=0,rid:int=0):void{
+			App.audio.play(Cons.audio.TurnRole);
+			if(!eff8)eff8=new Eff8();
+			eff8.gotoAndPlay(1);
+			eff8.sname.sname.text=n;
+			eff8.x=this.width/2;
+			eff8.y=this.height/2;
+			eff8.front.txt.text=frid==0?"":GL.roleData.get(frid).n;
+			eff8.back.txt.text=rid==0?"":GL.roleData.get(rid).n;
+			var mt:Matrix=new Matrix();
+			mt.tx=-75;
+			mt.ty=-105.5;
+			eff8.front.graphics.clear();
+			eff8.front.graphics.beginBitmapFill(OBJUtil.getInstanceByClassName("Role"+frid) as BitmapData,mt);
+			eff8.front.graphics.drawRect(-75,-105.5,139,196);
+			eff8.front.graphics.endFill();
+			eff8.back.graphics.clear();
+			eff8.back.graphics.beginBitmapFill(OBJUtil.getInstanceByClassName("Role"+rid) as BitmapData,mt);
+			eff8.back.graphics.drawRect(-75,-105.5,139,196);
+			eff8.back.graphics.endFill();
+			this.addChild(eff8);
+		}
+		
+		
+		public function get passView():PassDialog
+		{
+			if(!_passView)_passView=new PassDialog;
+			return _passView;
+		}
+
+		public function set passView(value:PassDialog):void
+		{
+			_passView = value;
+		}
+		public function layoutHandArea():void
+		{
+				var len:int=handArea.numChildren;
+				var arr:Array=[];
+				for (var i:int = 0; i <len; i++) 
+				{
+					arr.push(handArea.getChildAt(i));
+				}
+				if(arr.length<1)return;
+				var pos:Array=OBJUtil.getCenterPos(handArea.width,handArea.height,len,arr[0].width,arr[0].height);
+				
+				for(var j:int in arr){
+					TweenMax.to(arr[j],0.5,{x:pos[j].x,y:pos[j].y});
+				}
+		}
+		public function showInfo(param0:String):void
+		{
+				if(!infoview)infoview=new InfoView();
+				infoview.setTxt(param0);
+				infoview.popupCenter=true;
+				infoview.show();
+		}
+		public function hideInfo():void{
+			if(infoview)
+			infoview.close();
+		}
+		
+		public function showChooseColor():void
+		{
+			if(!decodedialog){
+				decodedialog=new DecodeDialog();
+				decodedialog.popupCenter=true;
+			}
+				decodedialog.popup();
+		}
+		public function showCardDialog(arr:Array,str="",snum=1,stype=0,targetid:int=-1,callFun:Function=null):void{
+			if(!cardDidialog)cardDidialog=new CardDialog();
+//			cardDidialog=new CardDialog();
+			cardDidialog.setData(arr,str,snum,stype,targetid,callFun);
+			App.dialog.popup(cardDidialog);
+		}
+		public function setPassState(param0:Boolean,dur:Number=0):void
+		{
+			bt2.selected=bt2.mouseEnabled=param0;			
+			pbar.visible=param0;
+			if(param0){
+				pbar.value=0;
+				App.timer.doFrameLoop(1,onProgress,[1/(App.stage.frameRate*(dur/1000))]);
+			}else{
+				clearTime();
+			}
+		}
+		private function onProgress(num:Number):void{
+			pbar.value+=num;
+			if(pbar.value>=1){
+				App.timer.clearTimer(onProgress);
+				pbar.value=0;
+			}
+		}
+		
+		public function clearTime():void{
+			App.timer.clearTimer(onProgress);
+			pbar.value=0;
+		}
+		private var  eff6:Eff6;
+		public function playVictory(phash:HashMap, param:Object):void
+		{
+			
+				var iden:int=param.iden;
+				if(iden==Player(phash.get(GL.id)).iden){
+					App.audio.play(Cons.audio.WIN);
+				}else{
+					App.audio.play(Cons.audio.LOST);
+				}
+				App.audio.play("assets/sounds/skill/"+param.victoryMan+"/victory.mp3");
+				
+				eff6=new Eff6;
+				eff6.mc.gotoAndStop(iden+1);
+				eff6.x=width/2;
+				eff6.y=height/2;
+				addChild(eff6);
+				App.timer.doOnce(3000,showBattleEnd,[param]);
+		}
+		public function showBattleEnd(param:Object):void{
+			removeChild(eff6);
+			eff6.stop();
+			eff6=null;
+			var endview:BattleEnd=new BattleEnd();
+			endview.setData(param);
+			addChild(endview);
+		}
+		public function initSkillInfo(p:Player):void{
+			var obj:Object=GL.roleData.get(p.rid);
+			
+			for (var i:int = 1; i <= 4; i++) 
+			{
+				var sid:int=obj["s"+i];
+				var btn:Button=this["s"+i];
+				if(sid>0){
+					btn.visible=true;
+					btn.label=GL.skillData.get(sid).n
+					btn.skin="png.custom.btn_015jnan_"+Trans.getStrByColor(GL.skillData.get(sid).co);
+					btn.toolTip=GL.skillData.get(sid).desc;
+					btn.data=p.skillHash.get(sid);
+					skillBtn.put(sid,btn);
+				}else{
+					btn.visible=false;
+				}
+			}
+		}
+		public function clearSkillBtnState():void{
+			var keys=balls.keys();
+			if(keys){
+				for(var i:int in keys){
+					var arr:Array=balls.get(keys[i]);
+					for(var j:int in arr){
+						arr[j].stop();
+						this.removeChild(arr[j]);
+					}
+					arr=null;
+					balls.remove(keys[i]);
+				}
+			}
+			if(s1.hasEventListener(MouseEvent.CLICK))
+			s1.removeEventListener(MouseEvent.CLICK,onBtnClick);
+			if(s2.hasEventListener(MouseEvent.CLICK))
+			s2.removeEventListener(MouseEvent.CLICK,onBtnClick);
+			if(s3.hasEventListener(MouseEvent.CLICK))
+			s3.removeEventListener(MouseEvent.CLICK,onBtnClick);
+			if(s4.hasEventListener(MouseEvent.CLICK))
+			s4.removeEventListener(MouseEvent.CLICK,onBtnClick);
+		}
+		public function setSkillBtnState(obj:Object):void   //设置技能按钮的可用状态
+		{
+			glowframe(skillBtn.get(obj.sid));
+			skillBtn.get(obj.sid).addEventListener(MouseEvent.CLICK,onBtnClick);
+		}
+		public function showSelectTarget(info:String,fun:Function,boo=false):void
+		{
+				if(!selectdialog){
+					selectdialog=new SelectTarget();
+					selectdialog.setInfo(info,fun,boo);
+					selectdialog.x=(1000-selectdialog.width)/2;
+					selectdialog.y=440;
+					selectdialog.popupCenter=false;
+				}
+					App.dialog.show(selectdialog);
+		}
+		private function glowframe(dis:Sprite,w:int=94,h:int=30):void{  //按钮走光动画
+			var temp:Array=[];
+			var a:int=Math.ceil(w/5)*2;
+			var b1:int=Math.ceil(h/5)*2;
+			a=a+b1+2;
+			var cx:int=0,cy:int=0,way:int=0;
+			var f:int=30,index:int=1;
+			for(var i:int=0;i<a;i++){
+				var b:MovieClip=new ball();
+				b.x=cx+dis.x;
+				b.y=cy+dis.y;
+				addChild(b);		
+				temp.push(b);
+				b.gotoAndPlay(index++);
+				if(index>30)index=1;
+				if(way==0){
+					cy+=5;
+					if(cy>h){
+						cy=h;
+						way=1;
+					}
+				}else if(way==1){			
+					cx+=5;
+					if(cx>w){
+						cx=w;
+						way=2
+					}
+				}else if(way==2){
+					cy-=5;
+					if(cy<0){
+						cy=0;
+						way=3;
+					}
+				}else{
+					cx-=5;			
+				}		
+			}	
+			balls.put(dis,temp);
+		}
+	}
+}

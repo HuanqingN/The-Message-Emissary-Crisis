@@ -1,0 +1,4 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层" width="1000" height="700">
+  <Image skin="png.custom.017zbds" x="0" y="0" layer="1"/>
+  <Button label="关闭[15]" skin="png.custom.btn_3a" x="430" y="608" layer="1" labelColors="0xffffff,0xffffff,0x9c9b9b" labelSize="15" var="btn" name="btn"/>
+</View>

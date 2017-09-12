@@ -1,0 +1,10 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image x="0" y="0" layer="1" name="bg" var="bg" width="140" height="196" skin="png.custom.006wr"/>
+  <Image x="0" y="0" layer="1" var="roleimg" name="roleimg"/>
+  <Image skin="png.custom.005tukuang" x="0" y="0" layer="1"/>
+  <Button skin="png.custom.btn_check" x="79" y="6" layer="1" width="32" height="18" var="check" name="check" visible="false" toolTip="角色信息"/>
+  <Image skin="png.custom.008fz" x="-4" y="-4" layer="1" var="owner" name="owner" visible="false"/>
+  <Label styleSkin="png.comp.label" x="9" y="173" layer="1" width="120" height="18" color="0xe6e6" align="center" var="rname" name="rname" selectable="false" size="12" stroke="0*0"/>
+  <Image skin="png.custom.010zb" x="26" y="134" layer="1" var="ready" name="ready" visible="false"/>
+  <Button skin="png.custom.btn_009gb" x="116" y="6" layer="1" var="kickbtn" name="kickbtn" visible="false"/>
+</View>

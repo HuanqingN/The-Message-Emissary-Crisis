@@ -1,0 +1,4 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.custom.b1" x="0" y="0" layer="1" width="492" height="41" sizeGrid="3,3,3,3"/>
+  <Label styleSkin="png.comp.label" x="4" y="3" layer="1" width="486" height="35" align="center" size="30" color="0xff0000" stroke="0xcccccc" var="txt" name="txt"/>
+</View>

@@ -1,0 +1,9 @@
+<View width="776" height="118" sceneColor="0xffffff" layers="1,0,1,1,第 1 层;2,1,1,0,第 2 层">
+  <Image skin="png.rpg.item1" x="0" y="0" layer="2"/>
+  <Image skin="png.custom.s_1" x="84" y="46" layer="2" name="lock" var="lock"/>
+  <Label text="9999&#xD;" styleSkin="png.comp.label" x="17" y="37" layer="2" width="64" height="45" align="center" bold="true" size="30" font="Microsoft YaHei Bold" name="rid"/>
+  <Label text="暗杀者的黑名单" styleSkin="png.comp.label" x="98" y="37" layer="2" width="251" height="45" align="center" bold="true" size="30" name="rname"/>
+  <Label text="准备中" styleSkin="png.comp.label" x="351" y="37" layer="2" width="94" height="45" align="center" color="0x38b338" bold="true" size="30" stroke="0x0" font="Microsoft YaHei Bold" name="status" embedFonts="false"/>
+  <Label text="200G/Lv.1/50%" styleSkin="png.comp.label" x="440" y="38" layer="2" width="237" height="45" align="center" bold="true" size="30" font="Microsoft YaHei Bold" name="limit"/>
+  <Label text="8/3" styleSkin="png.comp.label" x="672" y="38" layer="2" width="84" height="45" align="center" bold="true" size="30" font="Microsoft YaHei Bold" name="rcount"/>
+</View>

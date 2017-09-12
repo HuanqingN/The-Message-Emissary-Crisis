@@ -1,0 +1,6 @@
+<Dialog width="220" height="400" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.custom.b1" x="0" y="0" layer="1" width="220" height="400" sizeGrid="3,3,3,3"/>
+  <UIView source="test/CardView.xml" x="10" y="9" layer="1" width="200" height="279" var="img" name="img"/>
+  <Button label="军情+1" skin="png.comp.button" x="10" y="302" layer="1" width="202" height="32" labelSize="20" var="bt1" name="bt1"/>
+  <Button label="我是一个好人" skin="png.comp.button" x="10" y="352" layer="1" width="202" height="32" labelSize="20" var="bt2" name="bt2"/>
+</Dialog>

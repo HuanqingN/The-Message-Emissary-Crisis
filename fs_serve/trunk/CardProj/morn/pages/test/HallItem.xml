@@ -1,0 +1,4 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.custom.1" x="0" y="0" layer="1" var="bg" name="bg"/>
+  <Image skin="png.custom.r6" x="0" y="0" layer="1" var="front"/>
+</View>

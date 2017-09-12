@@ -1,0 +1,6 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.custom.b1" x="0" y="0" layer="1" width="588" height="39" sizeGrid="3,3,3,3"/>
+  <Label text="请选择完目标点击确定发动" styleSkin="png.comp.label" x="12" y="3" layer="1" width="408" height="33" size="20" color="0xcccccc" align="center" var="txt"/>
+  <Button label="确定" skin="jpg.custom.btn_g" x="484" y="4" layer="1" labelColors="0xdddddd,0xffffff,0xdddddd" labelSize="20" labelStroke="00" labelFont="微软雅黑" var="yesbtn" name="yesbtn"/>
+  <Button label="取消" skin="jpg.custom.btn_r" x="381" y="4" layer="1" var="nobtn" name="nobtn" labelSize="20" labelStroke="0" labelColors="0xdddddd,0xffffff,0xdddddd" visible="false"/>
+</Dialog>

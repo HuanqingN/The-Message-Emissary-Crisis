@@ -1,0 +1,20 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="3,1,0,0,第 3 层;2,1,0,0,第 2 层;1,1,0,0,第 1 层" width="877" height="603">
+  <Label text="游戏即将开始.." styleSkin="png.comp.label" x="68" y="505" layer="2" width="187" height="29" color="0x82b0b4" size="18" stroke="0x0" var="entertxt" name="entertxt" visible="false" mouseEnabled="false" font="黑体"/>
+  <Image skin="png.custom.001zytbNew" x="757" y="90" layer="2"/>
+  <Image skin="png.rpg.background2" layer="3" x="0" y="0" width="877" height="603"/>
+  <Label text="5" styleSkin="png.comp.label" x="190" y="504" layer="3" width="43" height="34" color="0x82b0b4" size="20" align="center" stroke="0*0" var="enternum" name="enternum" visible="false" mouseEnabled="false" font="黑体"/>
+  <Label text="10000" styleSkin="png.comp.label" x="742" y="534" layer="3" width="92" height="24" color="0xffcb00" size="14" stroke="0x0" var="ante" name="ante" align="center" font="黑体" bold="false"/>
+  <Box layers="1,1,0,0,第 1 层" layer="3" x="770" y="130" var="iden" name="iden">
+    <Button label="潜" skin="jpg.custom.btn_red" y="225" layer="1" var="b5" name="b5" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="军" skin="jpg.custom.btn_blue" layer="1" var="b0" name="b0" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="酱" skin="jpg.custom.btn_black" y="270" layer="1" var="b6" name="b6" labelColors="0xffffff" labelBold="true" mouseEnabled="false" labelSize="13" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="军" skin="jpg.custom.btn_blue" y="45" layer="1" var="b1" name="b1" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="军" skin="jpg.custom.btn_blue" y="90" layer="1" var="b2" name="b2" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="潜" skin="jpg.custom.btn_red" y="180" layer="1" var="b4" name="b4" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="潜" skin="jpg.custom.btn_red" y="135" layer="1" var="b3" name="b3" labelColors="0xffffff" labelBold="true" labelSize="13" mouseEnabled="false" labelMargin="2,2,2" scale="1.3"/>
+    <Button label="酱" skin="jpg.custom.btn_black" y="315" layer="1" var="b7" name="b7" labelColors="0xffffff" labelBold="true" mouseEnabled="false" labelSize="13" labelMargin="2,2,2" scale="1.3"/>
+  </Box>
+  <Button label="退出房间" skin="png.rpg.btn_greenbutton" x="495" y="577" layer="3" stateNum="1" labelColors="0，0，0" labelSize="20" labelBold="true" labelStroke="0xcccccc" labelFont="Microsoft YaHei Bold" width="162" height="60" var="exitbtn" name="exitbtn"/>
+  <Button label="开始对战" skin="png.rpg.btn_redbutton" x="676" y="577" layer="3" stateNum="1" width="162" height="60" labelColors="0，0，0" labelFont="Microsoft YaHei Bold" labelBold="true" labelStroke="0xcccccc" labelSize="20" var="readybtn" name="readybtn"/>
+  <Button label="选人卡" skin="png.rpg.btn_greenbutton" x="38" y="577" layer="3" stateNum="1" labelColors="0，0，0" labelSize="20" labelBold="true" labelStroke="0xcccccc" labelFont="Microsoft YaHei Bold" width="162" height="60" var="chooseRoleBtn" name="chooseRoleBtn" letterSpacing="3"/>
+</View>

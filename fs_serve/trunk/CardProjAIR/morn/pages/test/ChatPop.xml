@@ -1,0 +1,4 @@
+<View sceneWidth="154" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.comp.chatback" x="0" y="0" layer="1" sizeGrid="5,5,5,25" width="143" height="46" mouseEnabled="false" var="bg" name="bg"/>
+  <Label styleSkin="png.comp.label" x="0" y="1" layer="1" width="143" height="21" color="0x0" stroke="0x996600" size="15" wordWrap="true" backgroundColor="0xffffff" background="false" var="txt" name="txt" align="center" multiline="true" mouseEnabled="false" autoSize="left"/>
+</View>

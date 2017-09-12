@@ -1,0 +1,7 @@
+<Dialog sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="png.rpg.settingback" x="0" y="0" layer="1"/>
+  <Button skin="png.rpg.btn_hsliderbar" x="489" y="161" layer="1" var="musicbar" name="musicbar"/>
+  <Button skin="png.rpg.btn_hsliderbar" x="489" y="237" layer="1" var="voicebar" name="voicebar"/>
+  <Button label="确定" skin="png.rpg.btn_redbutton" x="244" y="388" layer="1" stateNum="1" width="205" height="56" labelSize="25" labelColors="0xffffff,0xffffff,0xffffff" letterSpacing="3" var="btn" name="btn"/>
+  <Image skin="png.rpg.closebtn" x="648" y="28" layer="1" var="closebtn" name="closebtn"/>
+</Dialog>

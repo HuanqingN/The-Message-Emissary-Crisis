@@ -1,0 +1,237 @@
+package skills
+{
+	import com.greensock.TweenMax;
+	
+	import flash.display.BitmapData;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	
+	import core.mng.Player;
+	import core.mng.SFS;
+	
+	import datas.Cons;
+	import datas.GL;
+	import datas.SkillVO;
+	
+	import utils.OBJUtil;
+	import utils.Rand;
+	import utils.StringUtils;
+	
+	import views.ACard;
+	import views.DecodeDialog;
+
+		/**
+		 * 蓄势待发
+		 */	
+		public class Skill165 extends Skill
+		{
+			override public function play(tvo1:SkillVO,obj:Object):void
+			{
+				super.play(tvo1,obj);
+				if(obj.goOn){
+					delayedFun1();
+				}else if(obj.draw){
+					drawCard();
+				}else if(obj.turn){
+					roleTurn();
+				}else{
+					playNormalAni();
+//					App.audio.play("assets/sounds/skill/"+rid+"/"+id+""+Rand.range(1,3)+".mp3");
+					TweenMax.delayedCall(1.5,delayedFun);
+				}
+			}
+
+			override public function delayedFun():void
+			{
+				var p:Player=phash.get(tvo.sponsor);
+				p.view.showTime(10000);
+				if(p.uid==GL.id){
+					clearState();
+					var decodedialog:DecodeDialog = new DecodeDialog();
+					decodedialog.popupCenter=true;
+					decodedialog.bt3.visible=false;
+//					bv.decodedialog.bt3.disabled=true;
+					decodedialog.title.text="请选择一项：";
+					decodedialog.bt1.label="①探寻";
+					decodedialog.bt1.labelColors="0x000000";
+					decodedialog.bt2.label="②翻转";
+					decodedialog.bt2.labelColors="0x000000";
+					decodedialog.callFun=onTypeChoosed;
+					decodedialog.popup();
+				}else{
+					bv.showInfo("请等待武僧·修行操作");
+				}
+			}
+			private var type:int =0;
+			public function onTypeChoosed(type:int):void{//1探寻 2翻转
+				this.type=type;
+				if(type==1){
+					tanxun();
+				} else{
+					var param:Object={sponsor:GL.id,tid:GL.tableId,ctype:1,type:type,oid:bm.oid};
+					SFS.sendWith(Cons.extension.roomserv,Cons.cmd.OnChooseRecieve,param);
+					clearState();
+				}
+			}
+			
+			private function tanxun():void{
+				var p:Player=phash.get(tvo.sponsor);
+				var arr:Array=p.hand;
+				cards=[];
+				for each(var i:ACard in  arr){
+					cards.push(i);
+				}
+				bv.showInfo("请选择一张手牌");
+				this.showCards();
+			}
+			
+			private var cardvid:int=-1;
+			override protected function onCardsSelect(evt:MouseEvent):void
+			{
+				cardvid=evt.currentTarget.vid;
+				var param:Object={sponsor:GL.id,tid:GL.tableId,ctype:1,type:this.type,card:cardvid,oid:bm.oid};
+				SFS.sendWith(Cons.extension.roomserv,Cons.cmd.OnChooseRecieve,param);
+				clearState();
+			} 
+			
+			public function delayedFun1():void{
+				bv.hideInfo();//关掉中间的信息显示，不然会挡住牌的显示
+				var cards:Array=data.cards;
+				var temp:Array=[];
+				for(var i:int in cards){
+					var c:ACard=new ACard();
+					c.setdata(cards[i]);
+					temp.push(c);
+				}
+				var p:Player=phash.get(tvo.sponsor);
+//				p.view.showTime(tvo.dur);
+				bm.addCardsToCenter(temp,true);//展示那张手牌
+				TweenMax.delayedCall(2,showTanxun,[temp]);
+			}
+			
+			public function showTanxun(arr:Array):void{//展示探寻的牌
+				for  (var j:int in arr) {
+					bv.removeChild(arr[j]);
+				}
+				var cards:Array=data.cards2;
+				var temp:Array=[];
+				for(var i:int in cards){
+					var c:ACard=new ACard();
+					c.setdata(cards[i]);
+					temp.push(c);
+				}
+				//				p.view.showTime(tvo.dur);
+				bm.addCardsToCenter(temp,true);//展示三张牌
+				TweenMax.delayedCall(2,delayedFun2,[temp]);
+			}
+			
+			public function delayedFun2(arr:Array):void{//选择要加入手牌的牌
+				for  (var j:int in arr) {
+					bv.removeChild(arr[j]);
+				}
+				var p:Player=phash.get(tvo.sponsor);
+				p.view.showTime(10000);
+				if(tvo.sponsor==GL.id){
+					var temp:Array=[];
+					var arr2:Array=data.cards3;
+					for(var i:int in arr2){
+						var ac:ACard=new ACard();
+						ac.setdata(arr2[i]);
+						temp.push(ac);
+					}
+					bv.showCardDialog(temp,"请选择要加入手牌的牌",2,2);
+				}else{
+					bv.showInfo("请等待武僧·修行探寻");
+				}
+			}
+			
+			private function drawCard():void
+			{
+				bv.hideInfo();//关掉中间的信息显示，不然会挡住牌的显示
+//				var arr:Array=data.cards2;
+//				var p:Player = phash.get(tvo.sponsor);
+//				var temp:Array=[];
+//				for(var i:int in arr){
+//					var c:ACard=new ACard();
+//					c.setdata(arr[i]);
+//					temp.push(c);
+//				}
+//				bm.addCardsToCenter(temp,true);
+//				TweenMax.delayedCall(0.5,drawCard2,[temp]);
+				drawCard2();
+			}
+			
+//			public function drawCard2(arr:Array):void{//展示要加入手牌的牌
+			private function drawCard2():void{//展示要加入手牌的牌
+//				for  (var i:int in arr) {
+//					bv.removeChild(arr[i]);
+//				}
+				var p:Player = phash.get(tvo.sponsor);
+				var arr2:Array=data.cards4;
+				var temp_draw:Array=[];
+				bv.setReport(StringUtils.getColorString("["+(p.view.pname.text==""?p.view.htxt.text:p.view.pname.text)+"]",0xffff00)+"探寻到了"+arr2.length+"张牌");
+				for(var j:int in arr2){
+					var c2:ACard=new ACard();
+					c2.setdata(arr2[j]);
+					temp_draw.push(c2);
+				}
+				bm.addCardsToCenter(temp_draw,true);
+				TweenMax.delayedCall(1.5,drawCard3,[temp_draw]);
+			}
+			
+			public function drawCard3(arr:Array):void{//加入手牌
+				var p:Player = phash.get(tvo.sponsor);
+				bm.sendCardsToPoint(arr, p);
+				App.audio.play(Cons.audio.Deal);
+				TweenMax.delayedCall(1,drawCard4);
+			}
+			
+			public function drawCard4():void{//展示选剩的牌
+				var p:Player = phash.get(tvo.sponsor);
+				var arr3:Array=data.cards5;
+				var temp_drop:Array=[];
+				for(var k:int in arr3){
+					var c3:ACard=new ACard();
+					c3.setdata(arr3[k]);
+					temp_drop.push(c3);
+				}
+				bm.addCardsToCenter(temp_drop,true);
+				TweenMax.delayedCall(1.5,drawCard5,[temp_drop]);
+			}
+			
+			public function drawCard5(arr:Array):void{//选剩的牌进入弃牌堆动画
+				bm.sendCardsToGraveyard(arr);
+			}
+			
+//			private function sendCardsToGraveyard(arr:Array):void{ // 把卡移动墓地
+//				var p:Point=new Point(bv.d1.x+bv.d1.width/2,bv.d1.y+bv.d1.height/2);
+//				for (var i:int = 0; i < arr.length; i++) 
+//				{
+//					TweenMax.to(arr[i],0.8,{x:p.x,y:p.y,scaleX:0.1,scaleY:0.1,onComplete:onCardMoveToGraveyardEnd,onCompleteParams:[arr[i]]});
+//				}
+//			}
+//			
+//			private function onCardMoveToGraveyardEnd(ca:ACard):void{//单张卡片移动结束动画，移除此卡
+//				bv.removeChild(ca);
+//				bm.graveyardArr.push(ca);
+//			}
+			
+			private function roleTurn():void{
+				var p:Player=phash.get(tvo.sponsor);
+				playTurnAni(p.rid,55);
+				if(GL.id==p.uid){
+					p.skillHash.clear();
+					p.skillHash=null;
+					p.clearRoleTip();
+					p.rid=55;
+					bv.initSkillInfo(p);
+				}else{
+					p.skillHash=null;
+					p.clearRoleTip();
+					p.rid=55;
+				}
+//				p.view.hint.text="上一张颜色：无";
+//				p.view.hint.visible=true;
+			}
+		}
+}

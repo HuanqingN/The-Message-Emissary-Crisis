@@ -1,0 +1,9 @@
+<View width="1000" height="700" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Image skin="jpg.rpg.background2" x="0" y="0" layer="1"/>
+  <Button label="出发" skin="png.rpg.btn_redbutton" x="402" y="602" layer="1" stateNum="1" labelBold="true" labelColors="0xffff00,0xffff00,0xffff00" labelSize="40" letterSpacing="5" labelStroke="0x333333" labelFont="Microsoft YaHei Bold" visible="false"/>
+  <Image skin="png.rpg.go_back_button" x="219" y="297" layer="1" var="leftbtn" name="leftbtn"/>
+  <Image skin="png.rpg.go_forward_button" x="725" y="298" layer="1" var="rightbtn" name="rightbtn"/>
+  <UIView source="test/CaveChoose.xml" x="311" y="34" layer="1" var="cc1" name="cc1"/>
+  <UIView source="test/CaveChoose.xml" x="1016" y="67" layer="1" var="cc2" name="cc2" visible="true" alpha="0"/>
+  <Image skin="png.rpg.closebtn1" x="929" y="0" layer="1" var="closebtn" name="closebtn"/>
+</View>

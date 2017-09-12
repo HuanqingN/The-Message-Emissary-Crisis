@@ -1,0 +1,202 @@
+package views
+{
+	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	
+	import core.mng.Player;
+	import core.mng.SFS;
+	
+	import datas.Cons;
+	import datas.GL;
+	
+	import game.ui.test.CardDialogUI;
+	
+	import manage.BM;
+	
+	import utils.HashMap;
+	import utils.OBJUtil;
+	import utils.effect.EffectsManager;
+	
+	public class CardDialog extends CardDialogUI
+	{
+		public function CardDialog()
+		{
+			super();
+			yes.addEventListener(MouseEvent.CLICK,onmouseclick);
+			hand.addEventListener(MouseEvent.CLICK,onmouseclick);
+			info.addEventListener(MouseEvent.CLICK,onmouseclick);
+		}
+		override public function closeFun():void
+		{
+			if(shash){
+			var arr:Array=shash.keys();
+			for(var i:int in arr){
+				arr[i].filters=[];
+			}
+				shash.clear();
+			}
+			callFun=null;
+			bg.removeAllChild();
+			data=null;
+		}
+		override public function dispose():void
+		{
+			super.dispose();
+			closeFun();
+			yes.removeEventListener(MouseEvent.CLICK,onmouseclick);
+			hand.removeEventListener(MouseEvent.CLICK,onmouseclick);
+			info.removeEventListener(MouseEvent.CLICK,onmouseclick);
+			data=null;
+		}
+		
+		private var data:Player;
+		private var nowVid:int;//选择的烧毁VID
+		private var selectNum:int=1;  //要选择的张数
+		private var shash:HashMap=new HashMap();  //已选择的HASH
+		private var callFun:Function;
+		public function setBurnData(p:Player,nvid:int,str:String="请选择要烧毁的情报",snum:int=1):void
+		{
+			data=p;
+			nowVid=nvid;
+			selectNum=snum;
+			txt.text=str;
+			var arr:Array=p.black;
+			var pos:Array=OBJUtil.getCenterPos(bg.width,bg.height,arr.length,Cons.CWID,Cons.CHEI);
+			for(var i:int in arr){
+				arr[i].scaleX=1;
+				arr[i].scaleY=1;
+				arr[i].rotation=0;
+				arr[i].x=pos[i].x;
+				arr[i].y=pos[i].y;
+				bg.addChild(arr[i]);
+				arr[i].addEventListener(MouseEvent.CLICK,onChooseBurnClick);
+			}
+		}
+		protected function onmouseclick(event:MouseEvent):void
+		{
+			if(selectNum==0 && selectType==9){
+				App.dialog.close(this);
+				closeFun();
+				return;
+			}
+			var param:Object;
+			if(selectType==0){
+				param={tid:GL.tableId,ctype:1,type:1};
+			}else if(selectType==1){//背面选牌
+				param={tid:GL.tableId,ctype:1,type:1,cards:null};
+				if(shash.size()>0){
+					var arr:Array=shash.keys();
+					var temp:Array=[];
+					for(var i:int in arr){
+						temp.push(arr[i].data);
+					}
+					param.cards=temp;
+				}else{
+					param.type=0;
+				}
+			}else if(selectType==2 || selectType>65){//正面选牌
+				param={tid:GL.tableId,ctype:1,type:1,cards:null};
+				if(selectType>65){
+					param.type=event.currentTarget.name=="hand"?0:1;
+				}
+				if(shash.size()>0){
+					var arr:Array=shash.keys();
+					var temp:Array=[];
+					for(var i:int in arr){
+						temp.push(arr[i].vid);
+					}
+					param.cards=temp;
+				}else{
+					if(selectNum>0){
+						if(selectType == 70)param.type=event.currentTarget.name=="hand"?0:1;//hand=放置。如果没选牌，点击放置则视为放置，点击交出则视为交出。
+					}else param.type=0;
+				}
+			}
+			if(callFun){
+				callFun.call(null,temp);			
+			}else{
+				if(targetid>-1)param.target=targetid;
+				param.oid=BM.inst.oid;
+				SFS.sendWith(Cons.extension.roomserv,Cons.cmd.OnChooseRecieve,param);
+			}
+			App.dialog.close(this);
+			closeFun();
+		}
+		
+		/**
+		 * @param arr  //卡牌数据
+		 * @param snum  //要选择的张数
+		 * @param stype //返回的类型  0 nothing 1 index 2vid
+		 * callfun 请求服务端的方法
+		 */		
+		private var selectType:int=0;
+		private var targetid:int=-1;
+		public function setData(arr:Array,str:String="",snum:int=1,stype:int=0,tarid:int=-1,callFun1:Function=null):void{
+			hand.visible=stype>65;
+			info.visible=stype>65;
+			yes.visible=stype<65;
+			if(stype==66){
+				hand.label="加入手牌";
+				info.label="加入情报";
+			}else if(stype==67){
+				hand.label="不盖伏";
+				info.label="盖伏";
+			}else if(stype==68){
+				hand.label="不替换";
+				info.label="替换情报";
+			}else if(stype==69){
+				hand.label="弃置";
+				info.label="放置";
+			}else if(stype==70){
+				hand.label="放置";
+				info.label="交出";
+			}else{
+				
+			}
+			
+			txt.text=str;
+			this.callFun=callFun1;
+			selectNum=snum;
+			selectType=stype;
+			targetid=tarid;
+			var pos:Array=OBJUtil.getCenterPos(bg.width,bg.height,arr.length,Cons.CWID,Cons.CHEI);
+			for(var i:int in arr){
+				arr[i].scaleX=1;
+				arr[i].scaleY=1;
+				arr[i].rotation=0;
+				arr[i].x=pos[i].x;
+				arr[i].y=pos[i].y;
+				arr[i].data=i;
+				bg.addChild(arr[i]);
+				if(stype>0)
+				arr[i].addEventListener(MouseEvent.CLICK,onChooseCardClick);
+			}
+		}
+		public function onChooseCardClick(evt:MouseEvent):void{
+			if(!shash.containsKey(evt.currentTarget)){ //如果没有
+				if(shash.size()>=selectNum){  //如果数量已经超过了就消前面一个
+					var temp:Sprite=shash.keys()[0];
+					shash.remove(temp);
+					temp.filters=[];
+					shash.put(evt.currentTarget,true);
+					EffectsManager.Glow(evt.currentTarget as Sprite,0x00ff00,1,5,5,20);
+				}else{    //没有超
+					shash.put(evt.currentTarget,true);
+					EffectsManager.Glow(evt.currentTarget as Sprite,0x00ff00,1,5,5,20);
+				}
+			}else{
+				shash.remove(evt.currentTarget);
+				evt.currentTarget.filters=[];
+			}
+		}
+		public function onChooseBurnClick(evt:MouseEvent):void{
+			var arr:Array=data.black;
+			for(var i:int in arr){
+				arr[i].removeEventListener(MouseEvent.CLICK,onChooseBurnClick);
+			}
+			var param:Object={cvid:nowVid,card:evt.currentTarget.vid,sponsor:GL.id,target:data.uid,tid:GL.tableId,ctype:1,oid:BM.inst.oid};
+			SFS.sendWith(Cons.extension.roomserv,Cons.cmd.UseCard,param);
+			this.close();
+		}
+	}
+}

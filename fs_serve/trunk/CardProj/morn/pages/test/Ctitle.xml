@@ -1,0 +1,4 @@
+<View sceneWidth="600" sceneColor="0xffffff" layers="1,1,0,0,第 1 层">
+  <Button label="酒馆" skin="png.rpg.btn_ctitle" x="0" y="0" layer="1" stateNum="1" labelFont="Microsoft YaHei Bold" letterSpacing="3" labelSize="15" var="btn" name="btn"/>
+  <Label text="1" styleSkin="png.comp.label" x="134" y="6" layer="1" color="0x33ff33" size="15" var="txt" name="txt" align="center" width="21" height="19"/>
+</View>

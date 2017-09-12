@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)" version="1.6.0_31">
+<bootpath>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\resources.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\rt.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\sunrsasign.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\jsse.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\jce.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\charsets.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\modules\jdk.boot.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre" version="1.6.0_31">
+<bootpath>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\resources.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\rt.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\sunrsasign.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\jsse.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\jce.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\charsets.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\modules\jdk.boot.jar"/>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="F:\FlashBuilder\InstDir\Adobe Flash Builder 4.7 (64 Bit)\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
